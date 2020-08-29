@@ -35,7 +35,13 @@ class CarHandler {
     }
 
     getCarsAfter2000() {
-        return {}, this._carsAfter2000)
+        return this._carsAfter2000;
+    }
+
+    getByCountry(country) {
+        const countries = [];
+        countries.push(this._carsAfter2000.map(), this._carsBefore2000);
+        return countries.filter(car => car.countryCreator === country);
     }
 
     cleanCarsBefore2000() {
