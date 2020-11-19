@@ -1,0 +1,109 @@
+version: '3'
+
+services:
+  liveplan-api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=development
+    environment:
+      - PORT=3000
+    expose:
+      - 3001
+    ports:
+      - 3200:3000
+    depends_on:
+      - liveplan-redis
+      - liveplan-minio
+      - mongo1
+      - mongo2
+      - mongo3
+      - mongosetup
+    links:
+      - liveplan-redis
+      - liveplan-minio
+      - mongo1
+      - mongo2
+      - mongo3
+      - mongosetup
+    volumes:
+      - ./:/home/node/app
+    command: npm run start
+
+  liveplan-redis:
+    image: 'redis:4-alpine'
+    command: redis-server --requirepass qwert
+    logging:
+      driver: none
+    ports:
+      - '3203:6379'
+
+  liveplan-minio:
+    hostname: liveplan-minio
+    image: minio/minio@sha256:36f0f2af4e9d9974db1a22f80bde0547727936f521e99254c657e0bc03ca138b
+    container_name: liveplan-minio
+    ports:
+      - '3202:9000'
+    volumes:
+      - './minio/data/:/data'
+      - './minio/config:/root/.minio'
+    environment:
+      MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${MINIO_SECRET_KEY}
+    command: server /data
+
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      - liveplan-minio
+    entrypoint: >
+      /bin/sh -c "
+      sleep 10;
+      /usr/bin/mc config host add data http://${MINIO_HOST}:${MINIO_PORT} ${MINIO_ACCESS_KEY} ${MINIO_SECRET_KEY};
+      /usr/bin/mc rm -r --force data/${MINIO_BUCKET};
+      /usr/bin/mc mb data/${MINIO_BUCKET};
+      /usr/bin/mc policy set public data/${MINIO_BUCKET};
+      exit 0;
+      "
+
+  mongo1:
+    hostname: mongo1
+    container_name: localmongo1
+    image: mongo:4.2-bionic
+    expose:
+      - 27017
+    restart: always
+    logging:
+      driver: none
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+  mongo2:
+      hostname: mongo2
+      container_name: localmongo2
+      image: mongo:4.2-bionic
+      expose:
+        - 27017
+      restart: always
+      logging:
+        driver: none
+      entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+  mongo3:
+      hostname: mongo3
+      container_name: localmongo3
+      image: mongo:4.2-bionic
+      expose:
+        - 27017
+      restart: always
+      logging:
+        driver: none
+      entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]
+  mongosetup:
+      image: mongo:4.2-bionic
+      depends_on:
+        - mongo1
+        - mongo2
+        - mongo3
+      volumes:
+        - ./mongo:/scripts
+      restart: "no"
+      entrypoint: [ "bash", "scripts/mongo_setup.sh"]
