@@ -1,0 +1,55 @@
+@import "~styles/colors";
+
+$padding-x: 50px;
+$padding-y: 50px;
+$padding-bottom-head: 20px;
+
+$font-size-typography-head: 18px;
+$font-size-typography-sub: 16px;
+$bottom-space: 30px;
+
+.box {
+  position: relative;
+  display: flex;
+  flex: 0 0 auto;
+  max-width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: $padding-y $padding-x;
+}
+
+.boxHead {
+  flex: 0 0 auto;
+  margin-bottom: $padding-bottom-head;
+}
+
+.boxBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.boxImage {
+  flex-grow: 1;
+  max-width: 100%;
+  min-height: 100vh;
+  background: {
+    position: center;
+    size: cover;
+    repeat: no-repeat;
+  }
+}
+
+.header {
+  font-size: $font-size-typography-head;
+  color: map-get($color-text, "primary");
+  font-weight: normal;
+}
+
+.sub {
+  font-size: $font-size-typography-sub;
+  color: map-get($color-text, "secondary");
+  font-weight: normal;
+}

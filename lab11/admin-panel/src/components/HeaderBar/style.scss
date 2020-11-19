@@ -1,0 +1,22 @@
+@import '~styles/colors';
+
+$header-bottom-indent: 55px;
+$profile-font-size: 18px;
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: $header-bottom-indent;
+}
+
+.profile {
+  &__link {
+    text-decoration: none;
+    color: colorText('default');
+    display: flex;
+    align-items: center;
+    font-size: $profile-font-size;
+  }
+}

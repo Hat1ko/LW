@@ -1,0 +1,25 @@
+@import '~styles/colors';
+
+.wrapper {
+  padding: 35px 40px;
+  flex-grow: 1;
+  background-color: $bg-color-page;
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+  overflow-y: auto;
+  justify-content: space-between;
+}
+
+.copyright {
+  margin-top: 70px;
+  color: colorText('light');
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 500;
+  font-size: 14px;
+
+  & span {
+    color: colorText('secondary');
+  }
+}

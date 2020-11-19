@@ -1,0 +1,21 @@
+@import "~styles/colors";
+
+$link-space: 10px;
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.link {
+  text-align: right;
+  color: colorText("secondary");
+  text-decoration: none;
+  margin-top: $link-space;
+  display: block;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

@@ -1,0 +1,82 @@
+@import '~styles/colors';
+@import '~styles/mixin';
+$cell-padding-y: 15px;
+$thead-padding-y: 35px;
+$table-border-width: 1px;
+$table-border-color: $color-divider;
+$table-border-right-height: 40px;
+$table-border: $table-border-width solid $table-border-color;
+$cell-aligns: (left, right, center);
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+$thead: '.thead';
+#{$thead} {
+  & th {
+    color: colorText('secondary');
+    font-weight: normal;
+  }
+}
+
+.tbody {
+}
+
+$row: '.row';
+#{$row} {
+  @each $class, $color in $color-text {
+    &_#{$class} {
+      color: $color;
+    }
+  }
+}
+
+.cell {
+  $cell: &;
+  padding: $cell-padding-y 0;
+  border-bottom: $table-border;
+  position: relative;
+
+  #{$row}:last-child & {
+    border-bottom: none;
+  }
+
+  &Container {
+    display: flex;
+    margin-right: $table-border-width;
+    &:after {
+      content: '';
+      display: inline-block;
+      height: $table-border-right-height;
+      width: $table-border-width;
+      background: $table-border-color;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-$table-border-right-height/2);
+    }
+
+    #{$cell}:last-child & {
+      margin-right: 0;
+      &:after {
+        content: none;
+      }
+    }
+
+    #{$thead} & {
+      margin-right: 0;
+
+      &:after {
+        content: none;
+      }
+    }
+  }
+
+  #{$thead} & {
+    padding: $thead-padding-y 0;
+  }
+}
+
+@include align;
+@include justify;

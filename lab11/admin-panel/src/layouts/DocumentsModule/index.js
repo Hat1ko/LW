@@ -1,0 +1,1 @@
+export { DocumentsModule } from './DocumentsModule'

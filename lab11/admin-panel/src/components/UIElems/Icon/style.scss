@@ -1,0 +1,45 @@
+@import '~styles/colors';
+
+.action {
+  fill: $color-action;
+}
+
+.primary {
+  fill: $color-primary;
+}
+
+.white {
+  fill: $color-white;
+}
+
+.default {
+  fill: colorText('default');
+}
+
+.error {
+  fill: $color-error;
+}
+
+.success {
+  fill: $color-success;
+}
+
+.stroke {
+  &.action {
+    stroke: $color-action;
+  }
+
+  &.primary {
+    stroke: $color-primary;
+  }
+
+  &.white {
+    stroke: $color-white;
+  }
+  &.default {
+    stroke: colorText('default');
+  }
+  &.error {
+    stroke: $color-error;
+  }
+}

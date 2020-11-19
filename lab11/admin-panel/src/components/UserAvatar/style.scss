@@ -1,0 +1,23 @@
+@import '~styles/colors';
+
+$profile-icon-radius: 8px;
+$background-wrapper-color: $color-default;
+
+.wrapper {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $profile-icon-radius;
+  overflow: hidden;
+  position: relative;
+  background-color: $background-wrapper-color;
+}
+
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

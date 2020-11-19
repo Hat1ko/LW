@@ -1,0 +1,164 @@
+@import '~styles/colors';
+
+$space-x: 29px;
+$space-top: 5px;
+$space-bottom: 20px;
+
+$item-padding: 9px 0;
+$item-border-radius: 11px;
+$item-font-size: 20px;
+$item-icon-width: 43px;
+$item-icon-full-right-indent: 15px;
+$item-icon-height: 25px;
+$item-icon-height-svg: 25px;
+$item-icon-width-svg: 25px;
+
+$control-width: 32px;
+$control-height: $control-width;
+$control-bg: $color-white;
+$control-color: $color-action;
+
+$listFull: '.containerSidebar.full';
+
+$transition-sidebar: 0.3s linear;
+
+%icon-menu-item {
+  width: $item-icon-width;
+  height: $item-icon-height;
+  min-width: $item-icon-width;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+  transition: margin $transition-sidebar;
+
+  svg {
+    width: $item-icon-width-svg;
+    height: $item-icon-height-svg;
+  }
+
+  #{$listFull} & {
+    margin-right: $item-icon-full-right-indent;
+  }
+}
+
+%name-menu-item {
+  flex-grow: 1;
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width $transition-sidebar;
+
+  #{$listFull} & {
+    max-width: 100%;
+  }
+}
+
+.containerSidebar {
+  position: relative;
+}
+
+.scrollContainer {
+  overflow: hidden;
+  transition: max-width $transition-sidebar;
+
+  .full & {
+    $listFull: &;
+  }
+}
+
+.menuButton {
+  border: none;
+  outline: none;
+  background: none;
+  padding: $item-padding;
+  font-size: $item-font-size;
+  border-radius: $item-border-radius;
+  color: $color-white;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  align-items: center;
+  cursor: pointer;
+
+  &Icon {
+    @extend %icon-menu-item;
+  }
+
+  &Name {
+    text-align: left;
+    @extend %name-menu-item;
+  }
+}
+
+.menuContainer {
+  display: flex;
+  height: 100vh;
+  overflow-y: scroll;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $bg-color-primary;
+  padding: $space-top $space-x $space-bottom;
+  transition: width $transition-sidebar;
+}
+
+.listColumn {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  list-style: none;
+}
+
+.item {
+  margin-bottom: 20px;
+
+  &Link {
+    padding: $item-padding;
+    font-size: $item-font-size;
+    border-radius: $item-border-radius;
+    color: $color-white;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.3s linear;
+
+    &:hover {
+      color: colorText('action');
+    }
+
+    &Active {
+      @include gradient(90deg, $color-gradient);
+
+      &:hover {
+        color: colorText('invertAction');
+      }
+    }
+  }
+
+  &Icon {
+    @extend %icon-menu-item;
+  }
+
+  &Name {
+    @extend %name-menu-item;
+  }
+}
+
+.sidebarControl {
+  position: absolute;
+  outline: none;
+  top: 50%;
+  transform: translate(50%, -50%);
+  right: 0;
+  color: $control-color;
+  background-color: $control-bg;
+  width: $control-width;
+  height: $control-height;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

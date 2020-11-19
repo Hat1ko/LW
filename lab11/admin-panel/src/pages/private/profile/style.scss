@@ -1,0 +1,14 @@
+@import '~styles/colors';
+.wrapper {
+  &Avatar {
+    max-width: 100%;
+    width: 430px;
+    margin-right: 50px;
+    height: 100%;
+    border-right: 1px solid $color-divider;
+  }
+  &Form {
+    max-width: 100%;
+    width: 300px;
+  }
+}

@@ -1,0 +1,84 @@
+@import '~styles/colors';
+
+$width: 115px;
+$height: 82px;
+$padding-y: 5px;
+$padding-x: 10px;
+$triangle-size: 14px;
+
+.list {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-wrap: wrap;
+}
+$root: '.wrapper';
+#{$root} {
+  width: $width;
+  height: $height;
+  padding: $padding-y $padding-x;
+  transition: padding 0.15s linear;
+  position: relative;
+
+  &:hover {
+    padding: 0 0;
+  }
+}
+
+.preview {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  & svg {
+    width: 50%;
+    height: 50%;
+  }
+}
+.footer {
+  position: absolute;
+  left: $padding-x;
+  right: $padding-x;
+  bottom: $padding-y;
+  display: flex;
+  align-items: center;
+  transition: all 0.15s linear;
+
+  #{$root}:hover & {
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.name {
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background-color: $bg-color-default;
+  height: $triangle-size;
+  line-height: $triangle-size;
+  font-size: 10px;
+  color: colorText('primary');
+  font-weight: 600;
+  padding-left: 4px;
+}
+
+.triangle {
+  width: $triangle-size;
+  height: 0;
+  &_error {
+    border-top: $triangle-size solid $color-error;
+    border-right: $triangle-size solid $bg-color-page;
+  }
+  &_default {
+    border-top: $triangle-size solid $bg-color-default;
+    border-right: $triangle-size solid $bg-color-page;
+  }
+}

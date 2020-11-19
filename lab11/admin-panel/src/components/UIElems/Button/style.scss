@@ -1,0 +1,167 @@
+@import '~styles/colors';
+@import '~styles/variables';
+@import '~styles/mixin';
+
+$border-radius: 25px;
+$border-width: 1px;
+$padding-x: 5px;
+$padding-y: 9px;
+$padding-y-big: 15px;
+$space-right: 10px;
+$width-default: 105px;
+$width-big: 190px;
+$transition-params: 0.15s linear;
+
+$box-shadow-size: 0 2px 24px 1px;
+$box-shadow: $box-shadow-size rgba($color-action-2, 0.15);
+$box-shadow-hover: $box-shadow-size rgba($color-action-2, 0.3);
+
+$content: '.content';
+$loader: '.loader';
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  outline: none;
+  border-radius: $border-radius;
+  font-size: $font-size-button;
+  padding: $border-width;
+  cursor: pointer;
+  line-height: 1;
+  width: $width-default;
+  margin-right: $space-right;
+  transition: background $transition-params;
+  box-shadow: $box-shadow;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    box-shadow: $box-shadow-hover;
+  }
+}
+
+#{$content} {
+  padding: $padding-y $padding-x;
+  border-radius: $border-radius - $border-width;
+  width: 100%;
+  height: 100%;
+  transition: background-color $transition-params;
+}
+
+#{$loader} {
+  width: $font-size-button - $border-width * 2;
+  height: $font-size-button - $border-width * 2;
+
+  .big & {
+    width: $font-size-button-big - $border-width * 2;
+    height: $font-size-button-big - $border-width * 2 -1;
+  }
+}
+
+.default {
+  color: colorText('default');
+  @include gradient(-90deg, $color-gradient);
+
+  & #{$content} {
+    background-color: $bg-color-default;
+  }
+
+  & #{$loader} {
+    fill: colorText('default');
+    stroke: colorText('default');
+  }
+
+  &:hover {
+    color: colorText('invertAction');
+
+    & #{$content} {
+      background-color: $color-action;
+    }
+
+    & #{$loader} {
+      fill: colorText('invertAction');
+      stroke: colorText('invertAction');
+    }
+  }
+
+  &.disabled {
+    color: colorText('disabled');
+    background-image: none;
+    background-color: $color-disabled;
+
+    & #{$content} {
+      background-color: $bg-color-default;
+    }
+  }
+}
+
+.action {
+  color: colorText('invertAction');
+  background-size: 200% 100%;
+  background-position: left;
+  @include doubleGradient(-90deg, $color-gradient);
+
+  &:hover {
+    background-position: right;
+    & #{$content} {
+      background-position: right;
+    }
+  }
+
+  & #{$loader} {
+    fill: colorText('invertAction');
+    stroke: colorText('invertAction');
+  }
+
+  & #{$content} {
+    background-size: 200% 100%;
+    background-position: left;
+    transition: all $transition-params;
+    @include doubleGradient(-90deg, $color-gradient);
+  }
+
+  &:focus {
+    background-image: none;
+    background-color: $color-action;
+  }
+
+  &.disabled {
+    color: colorText('disabled');
+    background-image: none;
+    background-color: $color-disabled;
+
+    & #{$content} {
+      background-image: none;
+      background-color: $color-disabled;
+    }
+  }
+}
+
+.big {
+  width: $width-big;
+  font-size: $font-size-button-big;
+  #{$content} {
+    padding: $padding-y-big $padding-x;
+  }
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.btnIcon {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+@include align;
+@include justify;

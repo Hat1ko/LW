@@ -1,0 +1,413 @@
+@import '~styles/colors';
+@import '~styles/variables';
+@import '~styles/mixin';
+
+$textInput-font-size: $font-size-input;
+$textInput-label-scale: 0.75;
+$textInput-space-y: $textInput-font-size;
+
+$searchInput-divider-width: 2px;
+$searchInput-divider-height: 16px;
+$searchInput-divider-radius: 1px;
+$searchInput-icon-height: 14px;
+$searchInput-icon-space: 15px;
+$searchInput-font-size: $font-size-input;
+$searchInput-transition-timing-function: linear;
+$searchInput-transition-duration: 0.3s;
+$searchInput-transition-params: $searchInput-transition-duration
+  $searchInput-transition-timing-function;
+$searchInput-buttonCloseSize: 13px;
+
+%error {
+  top: 100%;
+  transform: translateY($textInput-font-size * $textInput-label-scale/2);
+  left: 0;
+  right: 0;
+  position: absolute;
+  color: $color-error;
+  font-size: $textInput-font-size * $textInput-label-scale;
+}
+
+.textInput {
+  $root: &;
+  &__wrapper {
+    position: relative;
+    font-size: $textInput-font-size;
+    margin-top: $textInput-space-y;
+    display: inline-flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: colorText('secondary');
+    transform: translate(0, -$textInput-space-y);
+    transition: font-size 0.085s linear;
+
+    #{$root}_disabled & {
+      color: $color-disabled;
+    }
+
+    #{$root}_focus &,
+    #{$root}_empty & {
+      font-size: $textInput-font-size * $textInput-label-scale;
+    }
+  }
+
+  &__error {
+    color: $color-error;
+    font-size: $textInput-font-size * $textInput-label-scale;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 5px;
+  }
+
+  &__field {
+    font-size: $textInput-font-size;
+    transition: border-color 0.3s linear;
+    border: {
+      bottom: {
+        width: 1px;
+        style: solid;
+        color: $color-divider;
+      }
+    }
+
+    #{$root}_focus & {
+      border: {
+        bottom: {
+          color: $color-focus-divider;
+        }
+      }
+    }
+
+    #{$root}_disabled & input {
+      color: $color-disabled;
+    }
+
+    #{$root}_error & {
+      border: {
+        bottom: {
+          color: $color-error;
+        }
+      }
+    }
+
+    & input {
+      font-family: $font-family-base;
+      font-weight: $font-weight-base;
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 5px 0;
+      outline: none;
+      font-size: inherit;
+    }
+  }
+
+  &_fullWidth {
+    width: 100%;
+  }
+}
+
+.searchInput {
+  $root: &;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  $isFocus: '#{$root}_focus';
+
+  &__containerIcon {
+    display: flex;
+    align-items: center;
+    width: auto;
+  }
+
+  &__wrapper {
+    position: relative;
+    font-size: $searchInput-font-size;
+    display: inline-flex;
+    align-items: center;
+    border-bottom: 1px solid transparent;
+    transition: border-color $searchInput-transition-params;
+
+    &#{$isFocus} {
+      border-color: $color-divider;
+    }
+  }
+
+  &__error {
+    color: $color-error;
+    font-size: $textInput-font-size * $textInput-label-scale;
+  }
+
+  &__divider {
+    width: $searchInput-divider-width;
+    height: $searchInput-divider-height;
+    border-radius: $searchInput-divider-radius;
+    background-color: $color-action;
+    transition-delay: $searchInput-transition-duration;
+    transition-property: background-color;
+    transition-timing-function: $searchInput-transition-timing-function;
+    transition-duration: 0s;
+
+    #{$isFocus} & {
+      transition-delay: 0s;
+      background-color: transparent;
+    }
+  }
+
+  &__icon {
+    height: $searchInput-icon-height;
+    margin: 0 $searchInput-icon-space 0 0;
+    transition: all $searchInput-transition-params;
+    transform-origin: left;
+    transform: rotateY(90deg);
+    fill: $color-action;
+
+    #{$isFocus} & {
+      transform: rotateY(0deg);
+    }
+  }
+
+  &__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 0;
+    color: inherit;
+    z-index: 0;
+  }
+
+  &__buttonClose {
+    outline: none;
+    border: none;
+    background: none;
+    opacity: 0;
+    overflow: hidden;
+    width: 0;
+    cursor: pointer;
+    transition: opacity $searchInput-transition-params;
+
+    #{$isFocus} & {
+      width: $searchInput-buttonCloseSize;
+      opacity: 1;
+    }
+
+    & svg {
+      fill: $color-divider;
+      width: $searchInput-buttonCloseSize;
+      height: $searchInput-buttonCloseSize;
+    }
+  }
+
+  &__field {
+    flex-grow: 1;
+    position: relative;
+    color: colorText('default');
+
+    & input {
+      position: relative;
+      z-index: 1;
+      font-family: $font-family-base;
+      font-weight: $font-weight-base;
+      background: none;
+      border: none;
+      width: 100%;
+      padding: 5px 0;
+      outline: none;
+      font-size: inherit;
+      color: inherit;
+    }
+  }
+}
+
+$select-options-padding: 15px 10px;
+$select-options-radius: 15px;
+$select-options-box-shadow: 0 2px 14px 0 rgba(247, 247, 247, 0.5);
+$select-options-min-width: 265px;
+$select-options-top-indent: 10px;
+
+$select-option-font-size: 14px;
+$select-option-bottom-indent: 20px;
+$checkbox-width: 19px;
+$checkbox-height: $checkbox-width;
+$checkbox-space: 15px;
+$checkbox-radius: 5px;
+$radio-radius: 50%;
+$radio-icon-size: 9px;
+$radio-border-width: 2px;
+
+@mixin radio($selected, $parent, $wrapper) {
+  display: inline-block;
+  width: $checkbox-width;
+  height: $checkbox-height;
+  margin-right: $checkbox-space;
+  background: $bg-color-default;
+  border-radius: $radio-radius;
+  border-width: $radio-border-width;
+  border-style: solid;
+  border-color: $bg-color-action-lighten;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #{$selected} & {
+    border-color: $bg-color-action !important;
+  }
+
+  #{$parent}:hover & {
+    border-color: $bg-color-action-lighten-2;
+  }
+
+  #{$wrapper}__checkIcon {
+    width: $radio-icon-size;
+    height: $radio-icon-size;
+    border-radius: $radio-radius;
+    background-color: $bg-color-action;
+  }
+}
+
+@mixin checkbox($selected, $parent) {
+  display: inline-block;
+  width: $checkbox-width;
+  height: $checkbox-height;
+  margin-right: $checkbox-space;
+  background: $bg-color-action-lighten;
+  border-radius: $checkbox-radius;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  #{$selected} & {
+    background: $bg-color-action !important;
+  }
+
+  #{$parent}:hover & {
+    background: $bg-color-action-lighten-2;
+  }
+}
+
+.select {
+  $isOpenSelect: '#{&}.open';
+  position: relative;
+
+  &Label {
+    cursor: pointer;
+  }
+
+  &Options {
+    position: absolute;
+    z-index: 9999;
+    top: 100%;
+    right: 0;
+    background: #ffffff;
+    padding: $select-options-padding;
+    border-radius: $select-options-radius;
+    box-shadow: $select-options-box-shadow;
+    min-width: $select-options-min-width;
+    margin-top: $select-options-top-indent;
+  }
+
+  &Option {
+    $wrapper: &;
+    $selected: '#{&}Selected';
+    font-size: $select-option-font-size;
+    display: flex;
+    align-items: center;
+    margin-bottom: $select-option-bottom-indent;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    $parent: &;
+    &__checkbox {
+      @include radio($selected, $parent, $wrapper);
+    }
+  }
+}
+
+$radio-group-option-font-size: $font-size-base;
+$radio-group-bottom-indent: 20px;
+$checkbox-space: 20px;
+
+.radioGroup {
+  $root: &;
+  $selected: '#{$root}_selected';
+  display: inline-block;
+  position: relative;
+
+  $parent: '#{&}__input';
+  #{$parent} {
+    font-size: $radio-group-option-font-size;
+    display: flex;
+    align-items: center;
+    margin-bottom: $radio-group-bottom-indent;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__checkbox {
+    @include radio($selected, $parent, $root);
+  }
+
+  &_fullWidth {
+    width: 100%;
+  }
+
+  &__error {
+    @extend %error;
+  }
+}
+
+$photo-input-label-space: 20px;
+$photo-input-label-font-size: 18px;
+
+%photo-input-label {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  font-size: $photo-input-label-font-size;
+  margin-left: $photo-input-label-space;
+  cursor: pointer;
+}
+
+.photoInput {
+  display: flex;
+  align-items: center;
+  color: colorText('primary');
+
+  & svg {
+    fill: colorText('primary');
+  }
+
+  &:hover {
+    & svg {
+      fill: colorText('action');
+    }
+  }
+
+  &__label {
+    @extend %photo-input-label;
+  }
+
+  &__button {
+    @extend %photo-input-label;
+    outline: none;
+    border: none;
+    background: none;
+  }
+
+  &__input {
+    display: none;
+  }
+}

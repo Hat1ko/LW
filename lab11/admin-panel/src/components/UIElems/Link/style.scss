@@ -1,0 +1,45 @@
+@import '~styles/colors';
+@import '~styles/variables';
+
+.link {
+  font-size: $font-size-base;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.15s linear;
+  & svg {
+    transition: all 0.15s linear;
+    height: $font-size-base;
+  }
+}
+
+.action {
+  color: colorText('action');
+  &:hover {
+    color: colorText('default');
+    & svg {
+      fill: colorText('default');
+    }
+  }
+}
+
+.default {
+  color: colorText('default');
+  &:hover {
+    color: colorText('primary');
+    & svg {
+      fill: colorText('primary');
+    }
+  }
+}
+
+.disabled {
+  color: colorText('disabled');
+  &:hover {
+    color: colorText('primary');
+    & svg {
+      fill: colorText('primary');
+    }
+  }
+}

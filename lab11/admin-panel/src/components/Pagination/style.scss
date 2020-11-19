@@ -1,0 +1,45 @@
+@import '~styles/colors';
+
+.text {
+  margin: 40px 0 20px;
+  text-align: center;
+  color: colorText('secondary');
+
+  &__page {
+    margin-left: 10px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 10px;
+  min-width: 35px;
+  line-height: 1;
+  font-size: 16px;
+  text-decoration: none;
+  margin-right: 5px;
+  border-radius: 5px;
+  color: colorText('primary');
+  background-color: $bg-color-default;
+  font-weight: 500;
+  transition: all 0.15s linear;
+
+  &:hover {
+    color: colorText('invertAction');
+    background-color: $bg-color-action-lighten-2;
+  }
+
+  &_active {
+    font-weight: 600;
+    color: colorText('invertAction');
+    background-color: $bg-color-action;
+  }
+}

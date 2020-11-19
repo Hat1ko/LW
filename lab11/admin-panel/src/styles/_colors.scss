@@ -1,0 +1,80 @@
+@import '~styles/functions';
+
+$color-action: #ff681c;
+$color-action-2: #fd4b39;
+$color-default: #fbfbfb;
+$color-divider: rgba(#000000, 0.1);
+$color-focus-divider: #000000;
+$color-white: #ffffff;
+$color-error: #f94357;
+$color-success: #26d868;
+$color-primary: #333758;
+$color-disabled: #d8d8d8;
+
+$color-gradient: (
+  0%: #ff9621,
+  100%: #ff631c,
+);
+
+$color-text: (
+  'default': #000000,
+  'secondary': rgba(#000000, 0.5),
+  'light': rgba(#000000, 0.3),
+  'action': $color-action,
+  'primary': $color-primary,
+  'error': $color-error,
+  'success': $color-success,
+  'invertAction': #ffffff,
+  'disabled': #6c6c6c,
+);
+
+$bg-color-page: #ebedf0;
+$bg-color-tr: #f5f5f5;
+$bg-color-primary: #333758;
+$bg-color-default: #ffffff;
+$bg-color-action: #ff681c;
+$bg-color-action-lighten: #ffa172;
+$bg-color-action-lighten-2: #fb874d;
+
+@function colorText($key) {
+  @return map-get($color-text, $key);
+}
+
+@function getGradientColors($colors) {
+  $grad: null;
+  @each $p, $c in $colors {
+    $grad: append($grad, join($c, $p), $separator: comma);
+  }
+  @return $grad;
+}
+
+@mixin gradient($deg, $colors) {
+  & {
+    background-image: linear-gradient($deg, getGradientColors($colors));
+  }
+}
+
+@mixin doubleGradient($deg, $colors) {
+  & {
+    $newColors: ();
+    @each $p, $c in $colors {
+      $key: $p/2;
+      $newColors: map-merge(
+        $newColors,
+        (
+          $key: $c,
+        )
+      );
+    }
+    @each $p, $c in mapReverse($colors) {
+      $key: 100 - $p/2;
+      $newColors: map-merge(
+        $newColors,
+        (
+          $key: $c,
+        )
+      );
+    }
+    background-image: linear-gradient($deg, getGradientColors($newColors));
+  }
+}

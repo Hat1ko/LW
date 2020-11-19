@@ -1,0 +1,39 @@
+@import '~styles/colors';
+@import '~styles/mixin';
+$card-space: 20px;
+$card-radius: 20px;
+$transition-params: 0.15s linear;
+
+.card {
+  padding: $card-space;
+  border-radius: $card-radius;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.cardHeader {
+  display: flex;
+}
+
+.action {
+  color: colorText('invertAction');
+  @include gradient(90deg, $color-gradient);
+  box-shadow: 0 2px 14px 0 rgba(247, 247, 247, 0.5);
+}
+
+.default {
+  color: colorText('default');
+  background: $bg-color-default;
+  box-shadow: 0 2px 14px 0 rgba(223, 223, 223, 0.5);
+}
+
+.isLink {
+  transition: all $transition-params;
+  &:hover {
+    transform: scale(1.08);
+  }
+}
+
+@include align;
+@include justify;

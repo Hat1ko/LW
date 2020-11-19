@@ -1,0 +1,174 @@
+@import '~styles/colors';
+
+$font-size-name: 16px;
+$font-size-small: 14px;
+
+$space-x-linear: 15px;
+
+$icon-height-name: 18px;
+$icon-height-field: 14px;
+$icon-space: 5px;
+
+$y-indent: 15px;
+
+%fieldLinear {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+
+  & svg {
+    margin-right: $icon-space;
+    height: $icon-height-field;
+  }
+}
+
+%svgStyle {
+  width: auto;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: $icon-height-name;
+  margin-right: $icon-space;
+}
+
+.small {
+  font-size: $font-size-small;
+}
+
+.label {
+  font-weight: 500;
+}
+
+%bottomIndent {
+  margin-bottom: $y-indent;
+  margin-top: $y-indent;
+}
+
+.linear {
+  $root: &;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $bg-color-tr;
+  }
+
+  &Table {
+    border-spacing: 0;
+    margin-left: -$space-x-linear;
+    margin-right: -$space-x-linear;
+  }
+
+  &Label {
+    margin-right: $icon-space;
+    font-weight: normal;
+    color: colorText('secondary');
+  }
+
+  &Name {
+    width: 100%;
+    position: relative;
+    padding-left: $space-x-linear;
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-start;
+    font-size: $font-size-name;
+    line-height: $icon-height-name;
+    color: colorText('default');
+    text-decoration: none;
+    @extend %bottomIndent;
+
+    &Text {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      position: absolute;
+      left: $space-x-linear + $icon-height-name + $icon-space;
+      top: 0;
+      bottom: 0;
+      right: 0;
+    }
+
+    & svg {
+      @extend %svgStyle;
+    }
+  }
+
+  &Status {
+    padding-right: $space-x-linear;
+    @extend %bottomIndent;
+    @extend %fieldLinear;
+  }
+
+  &Date {
+    @extend %fieldLinear;
+    @extend %bottomIndent;
+  }
+}
+
+%fieldInfoGrid {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+
+  & svg {
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+  }
+
+  & span {
+    color: colorText('secondary');
+  }
+}
+
+.grid {
+  $root: &;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  width: 220px;
+
+  &Header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &Status {
+    @extend %fieldInfoGrid;
+    font-size: 12px;
+  }
+
+  &Info {
+    margin-top: 15px;
+    font-size: 14px;
+    @extend %fieldInfoGrid;
+    & span {
+      margin-right: 5px;
+      font-weight: normal;
+    }
+  }
+
+  &Date {
+    @extend %fieldInfoGrid;
+    font-size: 12px;
+  }
+
+  &Name {
+    font-size: 14px;
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-start;
+    line-height: $icon-height-name;
+    margin-top: 25px;
+    color: colorText('default');
+    text-decoration: none;
+
+    & svg {
+      @extend %svgStyle;
+    }
+  }
+}

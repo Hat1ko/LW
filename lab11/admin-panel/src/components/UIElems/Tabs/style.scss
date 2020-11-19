@@ -1,0 +1,45 @@
+@import '~styles/colors';
+@import '~styles/variables';
+
+$tab-font-size: $font-size-base;
+$tab-space-right: 40px;
+$tab-point-size: 6px;
+$underline-padding: 10px;
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.tab {
+  font-size: $tab-font-size;
+  border: none;
+  background: none;
+  box-shadow: none;
+  font-weight: normal;
+  color: colorText('default');
+  outline: none;
+  margin-right: $tab-space-right;
+  cursor: pointer;
+}
+
+.activeTab {
+  color: colorText('action');
+}
+
+.underline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: ($tab-point-size + $underline-padding);
+}
+
+.active {
+  display: inline-block;
+  width: $tab-point-size;
+  height: $tab-point-size;
+  border-radius: 50%;
+  background-color: $color-action;
+}

@@ -1,0 +1,75 @@
+@import '~styles/colors';
+
+$counter-width: 80px;
+$counter-height: $counter-width;
+$counter-radius: 17px;
+$counter-space: 15px;
+$counter-font-size: 20px;
+
+$icon-height: 22px;
+
+//variants
+$default: '.default';
+$action: '.action';
+
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+
+  & .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $counter-width;
+    height: $counter-height;
+    border-radius: $counter-radius;
+    margin-right: $counter-space;
+    font-weight: 500;
+    font-size: $counter-font-size;
+
+    #{$default} & {
+      background: $color-default;
+      color: $color-action;
+    }
+
+    #{$action} & {
+      color: colorText('invertAction');
+      background: rgba(#ffffff, 0.3);
+    }
+  }
+}
+
+.title {
+  #{$default} & {
+    color: colorText('default');
+  }
+
+  #{$action} & {
+    color: colorText('invertAction');
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.icon {
+  height: $icon-height;
+  margin: 2px 0;
+
+  #{$default} & {
+    fill: $color-action;
+  }
+
+  #{$action} & {
+    fill: colorText('invertAction');
+  }
+}

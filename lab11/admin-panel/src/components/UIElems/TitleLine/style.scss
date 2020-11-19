@@ -1,0 +1,13 @@
+@import '~styles/colors';
+
+$line-width: 496px;
+$line-height: 1px;
+$line-left-indent: 50px;
+
+.line {
+  display: inline-block;
+  width: $line-width;
+  height: $line-height;
+  margin-left: $line-left-indent;
+  background-color: $color-divider;
+}

@@ -1,0 +1,60 @@
+@import '~styles/colors';
+@import '~styles/variables';
+@import '~styles/mixin';
+
+$variants: ('h1', 'h2', 'p', 'body');
+
+$font-sizes: (
+  'h1': 20px,
+  'h2': 18px,
+  'body': $font-size-base,
+  'p': 14px,
+  'span': 14px,
+);
+
+$font-weight: (
+  'h1': 500,
+  'h2': 500,
+  'body': $font-weight-base,
+  'p': 400,
+  'span': 400,
+);
+
+@each $class, $color in $color-text {
+  .color-#{$class} {
+    color: $color;
+  }
+}
+
+@each $class in $variants {
+  .#{$class} {
+    display: flex;
+    font-weight: map-get($font-weight, $class);
+    font-size: map-get($font-sizes, $class);
+  }
+}
+
+@include align;
+@include justify;
+
+$textLabel-space: 5px;
+
+.textLabel {
+  color: colorText('default');
+  font-weight: 500;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  span.Label {
+    color: colorText('secondary');
+    margin-right: 5px;
+    font-weight: 400;
+  }
+
+  &Inline {
+    display: inline-flex;
+  }
+}

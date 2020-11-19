@@ -1,0 +1,48 @@
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+$align: (
+  "start": flex-start,
+  "end": flex-end,
+  "center": center
+);
+
+$justify: (
+  "start": flex-start,
+  "end": flex-end,
+  "center": center,
+  "around": space-around,
+  "between": space-between
+);
+
+@mixin align {
+  .align {
+    @each $class, $value in $align {
+      &-#{$class} {
+        align-items: $value;
+      }
+    }
+  }
+}
+
+@mixin justify {
+  .justify {
+    @each $class, $value in $justify {
+      &-#{$class} {
+        justify-content: $value;
+      }
+    }
+  }
+}
